@@ -5,7 +5,7 @@ import tsconfigPaths from "vite-tsconfig-paths";
 import { tanstackRouter } from "@tanstack/router-plugin/vite";
 
 export default defineConfig({
-  base: "/photobooth/",
+
   build: {
     outDir: "dist/photobooth",
   },
