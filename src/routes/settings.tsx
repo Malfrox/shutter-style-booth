@@ -36,12 +36,12 @@ function SettingsPage() {
 
           <div className="mt-4">
             <p className="type-label mb-1.5">Timer</p>
-            <div className="flex gap-2">
+            <div className="grid grid-cols-4 gap-2">
               {["Off", "3s", "5s", "10s"].map((t) => (
                 <button
                   key={t}
                   type="button"
-                  className="btn-secondary flex-1 justify-center hover:border-secondary hover:bg-secondary/8"
+                  className="btn-secondary justify-center px-2 hover:border-secondary hover:bg-secondary/8"
                 >
                   {t}
                 </button>
