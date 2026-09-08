@@ -19,8 +19,8 @@ type Ctx = {
   setSelectedFilter: (css: string) => void;
   selectedFilterName: string;
   setSelectedFilterName: (name: string) => void;
-  selectedTemplate: string;
-  setSelectedTemplate: (id: string) => void;
+  stripColor: string;
+  setStripColor: (color: string) => void;
   settings: BoothSettings;
   updateSettings: (patch: Partial<BoothSettings>) => void;
 };
@@ -31,15 +31,15 @@ const defaultSettings: BoothSettings = {
   timer: 3,
   facingMode: "user",
   format: "png",
-  resolution: { w: 1080, h: 1920 },
-  title: "",
+  resolution: { w: 1080, h: 1440 },
+  title: "MY PHOTOBOOTH",
 };
 
-export function BoothProvider({ children }: { children: ReactNode }) {
+export const BoothProvider = ({ children }: { children: ReactNode }) => {
   const [photos, setPhotos] = useState<Photo[]>([]);
-  const [selectedFilter, setSelectedFilter] = useState("sepia(.35) saturate(1.2) contrast(.95)");
-  const [selectedFilterName, setSelectedFilterName] = useState("Kodak Gold 200");
-  const [selectedTemplate, setSelectedTemplate] = useState("strip");
+  const [selectedFilter, setSelectedFilter] = useState("none");
+  const [selectedFilterName, setSelectedFilterName] = useState("Normal");
+  const [stripColor, setStripColor] = useState("#FFFFFF");
   const [settings, setSettings] = useState<BoothSettings>(defaultSettings);
 
   const addPhoto = useCallback((p: Photo) => setPhotos((prev) => [p, ...prev]), []);
@@ -55,9 +55,12 @@ export function BoothProvider({ children }: { children: ReactNode }) {
       value={{
         photos, addPhoto, removePhoto, clearPhotos,
         selectedFilter, setSelectedFilter,
-        selectedFilterName, setSelectedFilterName,
-        selectedTemplate, setSelectedTemplate,
-        settings, updateSettings,
+        selectedFilterName,
+        setSelectedFilterName,
+        stripColor,
+        setStripColor,
+        settings,
+        updateSettings,
       }}
     >
       {children}

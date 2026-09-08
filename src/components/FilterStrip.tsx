@@ -9,42 +9,35 @@ type Group = {
 
 const groups: Group[] = [
   {
-    title: "Vintage",
+    title: "Standard",
+    serif: false,
+    accent: "var(--foreground)",
+    filters: [
+      { name: "Normal", css: "none" },
+      { name: "Classic B&W", css: "grayscale(1) contrast(1.1) brightness(1.05)" },
+      { name: "High Contrast B&W", css: "grayscale(1) contrast(1.4) brightness(0.95)" },
+    ],
+  },
+  {
+    title: "Vintage Film",
     serif: true,
     accent: "var(--primary)",
     filters: [
-      { name: "Kodak Gold 200", css: "sepia(.35) saturate(1.2) contrast(.95)" },
-      { name: "Fujifilm Superia", css: "hue-rotate(-12deg) saturate(1.15)" },
-      { name: "Agfa Precisa", css: "hue-rotate(12deg) saturate(.9)" },
-      { name: "Polaroid SX70", css: "sepia(.45) contrast(.85) brightness(1.08)" },
-      { name: "Film Noir", css: "grayscale(1) contrast(1.35)" },
-      { name: "Cinestill 800T", css: "hue-rotate(-20deg) saturate(1.3) brightness(1.05)" },
+      { name: "Kodak Gold 200", css: "sepia(.25) saturate(1.3) contrast(1.1) brightness(1.05)" },
+      { name: "Fujifilm Superia", css: "hue-rotate(-10deg) saturate(1.2) contrast(1.05)" },
+      { name: "Polaroid SX70", css: "sepia(.35) contrast(0.9) brightness(1.1) saturate(0.8)" },
+      { name: "Cinestill 800T", css: "hue-rotate(-15deg) saturate(1.4) brightness(1.1) contrast(1.2)" },
     ],
   },
   {
-    title: "Modern",
+    title: "Modern & Effects",
     serif: false,
     accent: "var(--secondary)",
     filters: [
-      { name: "Vibrant", css: "saturate(1.4) contrast(1.2)" },
-      { name: "Pastel", css: "saturate(.7) contrast(.9) brightness(1.1)" },
-      { name: "Neon 80s", css: "saturate(1.6) contrast(1.3) hue-rotate(-25deg)" },
-      { name: "Moody Blue", css: "saturate(.8) contrast(1.15) hue-rotate(20deg)" },
-      { name: "Golden Hour", css: "sepia(.2) saturate(1.15) brightness(1.05)" },
-      { name: "Cyberpunk", css: "saturate(1.2) contrast(1.5) hue-rotate(-40deg)" },
-    ],
-  },
-  {
-    title: "Effects",
-    serif: false,
-    accent: "var(--gold)",
-    filters: [
-      { name: "Light Leak", css: "brightness(1.15) sepia(.25)" },
-      { name: "Cool Leak", css: "brightness(1.1) hue-rotate(35deg)" },
-      { name: "Film Grain", css: "contrast(1.1)" },
-      { name: "Vignette", css: "brightness(.92)" },
-      { name: "Glitch", css: "saturate(1.5) hue-rotate(-60deg)" },
-      { name: "Bokeh", css: "blur(1px) brightness(1.06)" },
+      { name: "Vibrant", css: "saturate(1.5) contrast(1.1)" },
+      { name: "Pastel", css: "saturate(.75) contrast(.95) brightness(1.15)" },
+      { name: "Golden Hour", css: "sepia(.3) saturate(1.2) brightness(1.1) hue-rotate(-5deg)" },
+      { name: "Cyberpunk", css: "saturate(1.4) contrast(1.3) hue-rotate(-30deg)" },
     ],
   },
 ];
@@ -57,7 +50,7 @@ export function FilterStrip() {
 
   return (
     <div className="border-t border-border bg-border/30">
-      <div className="space-y-3 px-4 py-3">
+      <div className="space-y-4 px-4 py-4">
         {groups.map((group) => (
           <div key={group.title}>
             <p
