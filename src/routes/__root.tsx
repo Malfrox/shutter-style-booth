@@ -10,7 +10,7 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
-import { reportMalnvyError } from "../lib/Malnvy-error-reporting";
+import { reportMalnvyError } from "../lib/malnvy-error-reporting";
 import { BoothProvider } from "../lib/photobooth-context";
 import { Toaster } from "../components/ui/sonner";
 
