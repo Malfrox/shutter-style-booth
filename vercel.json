@@ -1,0 +1,15 @@
+{
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/photobooth/",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/photobooth/(.*)",
+      "destination": "/photobooth/index.html"
+    }
+  ]
+}
