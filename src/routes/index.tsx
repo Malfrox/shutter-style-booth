@@ -80,7 +80,6 @@ function Booth() {
         {/* Camera Preview */}
         <div className="relative overflow-hidden rounded-lg border border-border bg-card">
           <div className="relative aspect-[3/4] max-h-[min(64vh,560px)] w-full sm:aspect-[9/16] md:aspect-[3/4] md:max-h-none">
-            {camState === "active" ? (
               <>
                 {/* Live video with selected filter applied via CSS */}
                 <video
@@ -109,23 +108,25 @@ function Booth() {
                   }}
                 />
               </>
-            ) : camState === "denied" ? (
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-card p-8 text-center">
-                <ImageOff size={48} className="text-destructive" />
-                <h2 className="type-h2">Camera access needed</h2>
-                <p className="text-sm text-muted-foreground">
-                  Allow camera access in your browser to use photobooth
-                </p>
-                <button type="button" className="btn-primary" onClick={() => startCamera(settings.facingMode)}>
-                  Try again
-                </button>
-              </div>
-            ) : (
-              /* idle / requesting */
-              <div className="absolute inset-0 flex items-center justify-center bg-card">
-                <div className="h-8 w-8 animate-spin rounded-full border-4 border-muted-foreground border-t-transparent" />
-              </div>
-            )}
+
+              {camState === "denied" && (
+                <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-card p-8 text-center">
+                  <ImageOff size={48} className="text-destructive" />
+                  <h2 className="type-h2">Camera access needed</h2>
+                  <p className="text-sm text-muted-foreground">
+                    Allow camera access in your browser to use photobooth
+                  </p>
+                  <button type="button" className="btn-primary" onClick={() => startCamera(settings.facingMode)}>
+                    Try again
+                  </button>
+                </div>
+              )}
+              
+              {(camState === "idle" || camState === "requesting") && (
+                <div className="absolute inset-0 flex items-center justify-center bg-card">
+                  <div className="h-8 w-8 animate-spin rounded-full border-4 border-muted-foreground border-t-transparent" />
+                </div>
+              )}
 
             {/* Flash overlay */}
             {flash && (
