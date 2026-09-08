@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useBooth } from "@/lib/photobooth-context";
 
 type Group = {
   title: string;
@@ -53,7 +53,7 @@ const swatch =
   "linear-gradient(135deg, #D4A574 0%, #D97040 45%, #6BA89E 100%)";
 
 export function FilterStrip() {
-  const [selected, setSelected] = useState("Kodak Gold 200");
+  const { selectedFilterName, setSelectedFilter, setSelectedFilterName } = useBooth();
 
   return (
     <div className="border-t border-border bg-border/30">
@@ -72,12 +72,15 @@ export function FilterStrip() {
             </p>
             <div className="scroll-x flex gap-3 pb-1">
               {group.filters.map((filter) => {
-                const active = selected === filter.name;
+                const active = selectedFilterName === filter.name;
                 return (
                   <button
                     key={filter.name}
                     type="button"
-                    onClick={() => setSelected(filter.name)}
+                    onClick={() => {
+                      setSelectedFilter(filter.css);
+                      setSelectedFilterName(filter.name);
+                    }}
                     className="shrink-0 rounded-[4px] bg-card p-1 transition-shadow"
                     style={{
                       width: 70,

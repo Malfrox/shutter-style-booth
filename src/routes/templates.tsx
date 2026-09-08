@@ -1,5 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useBooth } from "@/lib/photobooth-context";
 import { AppShell } from "@/components/AppShell";
 
 const cell = "rounded-[2px] bg-border/70";
@@ -77,7 +77,8 @@ export const Route = createFileRoute("/templates")({
 });
 
 function Templates() {
-  const [selected, setSelected] = useState("strip");
+  const { selectedTemplate, setSelectedTemplate } = useBooth();
+  const navigate = useNavigate();
 
   return (
     <AppShell>
@@ -88,18 +89,18 @@ function Templates() {
 
       <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-3">
         {templates.map((t) => {
-          const active = selected === t.id;
+          const active = selectedTemplate === t.id;
           return (
             <button
               key={t.id}
               type="button"
-              onClick={() => setSelected(t.id)}
+              onClick={() => setSelectedTemplate(t.id)}
               aria-pressed={active}
               className={`rounded-md p-2 text-left transition-all duration-200 ease-out hover:-translate-y-0.5 ${
                 active
                   ? "border-2 border-primary bg-primary/8 shadow-[0_4px_16px_rgba(217,112,64,0.15)]"
                   : "border border-border bg-card hover:border-secondary hover:shadow-[0_4px_12px_rgba(107,168,158,0.12)]"
-              } ${selected && !active ? "opacity-60" : ""}`}
+              } ${selectedTemplate && !active ? "opacity-60" : ""}`}
             >
               <div className="aspect-square w-full p-1">{t.preview}</div>
               <p className="type-h3 mt-2 text-[14px]">{t.label}</p>
@@ -109,11 +110,11 @@ function Templates() {
       </div>
 
       <div className="mt-8 flex gap-4 pb-10">
-        <button type="button" className="btn-secondary flex-1 justify-center">
+        <button type="button" className="btn-secondary flex-1 justify-center" onClick={() => navigate({ to: "/" })}>
           Back
         </button>
-        <button type="button" className="btn-primary flex-1">
-          Confirm Selection
+        <button type="button" className="btn-primary flex-1" onClick={() => navigate({ to: "/gallery" })}>
+          Build Collage
         </button>
       </div>
     </AppShell>
