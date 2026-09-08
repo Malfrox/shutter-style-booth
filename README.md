@@ -803,15 +803,15 @@ This spec is your source of truth. Export as:
 
 dont build and remove collage and galary and only build UI
 
-This project was built with [Lovable](https://lovable.dev).
+This project was built with [Malnvy](https://Malnvy.dev).
 
-## Build with Lovable
+## Build with Malnvy
 
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/3947a36c-cbb6-463a-bdfa-1ebc156a5986).
+Continue developing this project in the [Malnvy editor](https://Malnvy.dev/projects/3947a36c-cbb6-463a-bdfa-1ebc156a5986).
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
+- **Ship faster**: describe what you want to build and Malnvy handles the code.
+- **Stay in sync**: every change made in Malnvy is committed straight to this repository.
+- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Malnvy, ready for your next prompt.
 
 ## Development
 
@@ -823,3 +823,4 @@ cd <repository-name>
 npm i
 npm run dev
 ```
+

@@ -1,22 +1,22 @@
-type LovableErrorOptions = {
+type MalnvyErrorOptions = {
   mechanism?: "manual" | "onerror" | "unhandledrejection" | "react_error_boundary";
   handled?: boolean;
   severity?: "error" | "warning" | "info";
 };
 
-type LovableEvents = {
+type MalnvyEvents = {
   track?: (event: string, properties?: Record<string, unknown>) => string | null;
   captureException?: (
     error: unknown,
     context?: Record<string, unknown>,
-    options?: LovableErrorOptions,
+    options?: MalnvyErrorOptions,
   ) => void;
 };
 
 declare global {
   interface Window {
-    __lovableEvents?: LovableEvents;
-    __lovableReportRuntimeError?: (payload: {
+    __MalnvyEvents?: MalnvyEvents;
+    __MalnvyReportRuntimeError?: (payload: {
       message: string;
       stack?: string;
       filename?: string;
@@ -24,9 +24,9 @@ declare global {
   }
 }
 
-export function reportLovableError(error: unknown, context: Record<string, unknown> = {}) {
+export function reportMalnvyError(error: unknown, context: Record<string, unknown> = {}) {
   if (typeof window === "undefined") return;
-  window.__lovableEvents?.captureException?.(
+  window.__MalnvyEvents?.captureException?.(
     error,
     {
       source: "react_error_boundary",
@@ -40,7 +40,7 @@ export function reportLovableError(error: unknown, context: Record<string, unkno
     },
   );
   // Prod React does not rethrow boundary-caught errors to window.onerror, so the
-  // editor's telemetry never sees them. Forward to lovable.js's reporting hook,
+  // editor's telemetry never sees them. Forward to Malnvy.js's reporting hook,
   // which is present only inside the editor preview.
   // Loaders and server fns commonly throw a raw Response; String(it) is the
   // opaque "[object Response]", so pull out the status and URL instead.
@@ -51,9 +51,10 @@ export function reportLovableError(error: unknown, context: Record<string, unkno
         ? error.message
         : String(error);
   const stack = error instanceof Error ? error.stack : undefined;
-  window.__lovableReportRuntimeError?.({
+  window.__MalnvyReportRuntimeError?.({
     message,
     ...(stack !== undefined && { stack }),
     filename: window.location.pathname,
   });
 }
+
