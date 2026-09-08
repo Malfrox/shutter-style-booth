@@ -6,9 +6,7 @@ import { tanstackRouter } from "@tanstack/router-plugin/vite";
 
 export default defineConfig({
 
-  build: {
-    outDir: "dist/photobooth",
-  },
+
   plugins: [
     tanstackRouter({ target: "react", autoCodeSplitting: true }),
     react(),
