@@ -28,14 +28,16 @@ export const Route = createFileRoute("/")({
 function Booth() {
   return (
     <AppShell>
-      <section className="py-4">
-        <h1 className="type-h1">Photobooth</h1>
-        <p className="mt-1 text-sm text-muted-foreground">Ready?</p>
+      <section className="grid grid-cols-[minmax(0,1fr)_auto] items-end gap-3 py-4">
+        <div className="min-w-0">
+          <h1 className="type-h1 truncate text-[26px] sm:text-[32px]">Photobooth</h1>
+          <p className="mt-1 text-sm text-muted-foreground">Ready?</p>
+        </div>
       </section>
 
-      <div className="grid gap-6 pb-8 md:grid-cols-2 md:gap-8">
+      <div className="grid gap-4 pb-8 md:grid-cols-2 md:gap-8">
         <div className="relative overflow-hidden rounded-lg border border-border bg-card">
-          <div className="relative aspect-[9/16] w-full md:aspect-[3/4]">
+          <div className="relative aspect-[3/4] max-h-[min(64vh,560px)] w-full sm:aspect-[9/16] md:aspect-[3/4] md:max-h-none">
             <div
               className="absolute inset-0"
               style={{
