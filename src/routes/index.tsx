@@ -1,24 +1,91 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Camera, Check } from "lucide-react";
+import { AppShell } from "@/components/AppShell";
+import { FilterStrip } from "@/components/FilterStrip";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({
+    meta: [
+      { title: "Photobooth — Retro Camera Booth" },
+      {
+        name: "description",
+        content:
+          "A warm, retro photobooth: live preview, vintage film filters, and printable layouts.",
+      },
+      { property: "og:title", content: "Photobooth — Retro Camera Booth" },
+      {
+        property: "og:description",
+        content:
+          "A warm, retro photobooth: live preview, vintage film filters, and printable layouts.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
+  component: Booth,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+function Booth() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <AppShell>
+      <section className="py-4">
+        <h1 className="type-h1">Photobooth</h1>
+        <p className="mt-1 text-sm text-muted-foreground">Ready?</p>
+      </section>
+
+      <div className="grid gap-6 pb-8 md:grid-cols-2 md:gap-8">
+        <div className="relative overflow-hidden rounded-lg border border-border bg-card">
+          <div className="relative aspect-[9/16] w-full md:aspect-[3/4]">
+            <div
+              className="absolute inset-0"
+              style={{
+                background:
+                  "linear-gradient(160deg, #E7DFD4 0%, #CDBBA8 45%, #A99A8B 100%)",
+              }}
+            />
+            <div
+              className="absolute inset-0"
+              style={{
+                background:
+                  "radial-gradient(circle at 50% 45%, rgba(0,0,0,0) 45%, rgba(61,56,48,0.35) 100%)",
+              }}
+            />
+            <div
+              className="absolute inset-0 opacity-40"
+              style={{
+                backgroundImage:
+                  "linear-gradient(to right, rgba(249,247,243,.5) 1px, transparent 1px), linear-gradient(to bottom, rgba(249,247,243,.5) 1px, transparent 1px)",
+                backgroundSize: "33.33% 33.33%",
+              }}
+            />
+            <span className="type-timer absolute inset-x-0 top-1/2 -translate-y-1/2 text-center text-background drop-shadow">
+              3
+            </span>
+
+            <button
+              type="button"
+              aria-label="Capture photo"
+              className="absolute bottom-6 left-1/2 flex size-16 -translate-x-1/2 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-[var(--shadow-capture)] transition-transform duration-200 ease-[var(--ease-spring)] hover:scale-105 hover:bg-primary-hover hover:shadow-[var(--shadow-capture-hover)] active:scale-95 active:shadow-[var(--shadow-capture-active)]"
+            >
+              <Camera size={28} />
+            </button>
+          </div>
+        </div>
+
+        <div className="space-y-6">
+          <div className="overflow-hidden rounded-lg border border-border">
+            <FilterStrip />
+          </div>
+
+          <div
+            className="flex items-center gap-2 rounded-md px-4 py-3 text-sm text-background"
+            style={{ background: "rgba(212, 165, 116, 0.95)" }}
+          >
+            <Check size={18} />
+            Photo captured!
+          </div>
+        </div>
+      </div>
+    </AppShell>
   );
 }
