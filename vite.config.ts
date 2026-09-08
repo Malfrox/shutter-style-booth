@@ -5,6 +5,7 @@ import tsconfigPaths from "vite-tsconfig-paths";
 import { tanstackRouter } from "@tanstack/router-plugin/vite";
 
 export default defineConfig({
+  base: "/photobooth/",
   plugins: [
     tanstackRouter({ target: "react", autoCodeSplitting: true }),
     react(),
